@@ -1,0 +1,122 @@
+<!-- CTRL + SHIFT + F for pretty -->
+<app-bread-crumb [items]="[{label: 'Bairros', routerLink:'/bairros'}, {label: pageTitle}]"></app-bread-crumb>
+
+<div class="margin">
+
+  <p-panel header="Preencha o Formulario:">
+
+    <form [formGroup]="resourceForm" (submit)="submitForm()">
+
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+
+        <div class="p-col-12 p-md-6 p-lg-6" formGroupName="distritos">
+          <label for="cidade">Cidade</label>
+          <div class="ui-inputgroup" formGroupName="cidades">
+            <button pButton type="button" label="Buscar" (click)="showCidades($event)"></button>
+            <input type="text" style="font-weight: bold;" pInputText placeholder="Informe a cidade"
+              formControlName="nome" disabled="true">
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-3 p-lg-3" formGroupName="distritos">
+          <label for="distrito">Distrito</label>
+          <input id="distritoNome" type="text" style="font-weight: bold;" size="80" pInputText formControlName="nome"
+            disabled="true">
+        </div>
+
+        <div class="p-col-12 p-md-1 p-lg-1" formGroupName="distritos">
+          <label for="sigla">Estado</label>
+          <span formGroupName="cidades">
+            <span formGroupName="estados">
+              <input id="sigla" type="text" style="font-weight: bold;" size="2" pInputText formControlName="sigla"
+                disabled="true">
+            </span>
+          </span>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <label for="zonaRural">Zona Rural</label>
+          <p-dropdown id="zonaRural" name="zonaRural" [options]="zonaRural" placeholder="Selecione" [filter]="true"
+            formControlName="zonaRural"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <label for="nome">Nome</label>
+          <input id="nome" type="text" size="80" pInputText formControlName="nome">
+          <app-form-field-error [form-control]="resourceForm.get('nome')" header-colum="Nome"></app-form-field-error>
+        </div>
+
+        <div class="p-col-12 p-md-3 p-lg-3">
+          <label for="nomeAbreviado">Nome Abreviado</label>
+          <input id="nomeAbreviado" type="text" size="50" pInputText formControlName="nomeAbreviado">
+        </div>
+
+        <div class="p-col-12 p-md-3 p-lg-3">
+          <label for="nomePopular">Nome Popular</label>
+          <input id="nomePopular" type="text" size="60" pInputText formControlName="nomePopular">
+        </div>
+
+        <div class="ui-g-2 ui-md-2 ui-fluid">
+          <label>Data Criação</label>
+          <p-calendar name="dataCriacao" dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false"
+            [showIcon]="false" formControlName="dataCriacao"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <label for="leiCriacao">Lei Criação</label>
+          <input id="leiCriacao" type="text" size="20" pInputText formControlName="leiCriacao">
+        </div>
+
+        <div class="ui-g-2 ui-md-2 ui-fluid">
+          <label>Data Decreto</label>
+          <p-calendar name="dataDecreto" dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false"
+            [showIcon]="false" formControlName="dataDecreto"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <label for="decreto">Decreto</label>
+          <input id="decreto" type="text" size="20" pInputText formControlName="decreto">
+        </div>
+
+        <div class="ui-g-2 ui-md-2 ui-fluid">
+          <label>Data Portaria</label>
+          <p-calendar name="dataPortaria" dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false"
+            [showIcon]="false" formControlName="dataPortaria"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <label for="portaria">Portaria</label>
+          <input id="portaria" type="text" size="20" pInputText formControlName="portaria">
+        </div>
+
+        <div class="p-col-12 p-md-4 p-lg-4" formGroupName="pessoas">
+          <label for="vereador">vereador</label>
+          <div class="ui-inputgroup">
+              <button pButton type="button" label="Buscar" (click)="showPessoas($event)"></button>
+              <input type="text" style="font-weight: bold;" pInputText placeholder="Informe o vereador"
+              formControlName="nome" disabled="true">
+            </div>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2" formGroupName="pessoas">
+          <label for="distrito">C.P.F</label>
+          <input id="cpf" type="text" style="font-weight: bold;" size="80" pInputText formControlName="cpf" disabled="true">
+        </div>
+
+      </div>
+
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <button pButton type="button" label="Voltar" routerLink="/bairros" class="ui-button-danger"></button>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <button pButton type="button" [disabled]="submittingForm || resourceForm.invalid" type="submit"
+            icon="pi pi-check" label="Salvar" class="ui-button-success"></button>
+        </div>
+
+      </div>
+    </form>
+  </p-panel>
+</div>

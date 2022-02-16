@@ -1,0 +1,63 @@
+package br.com.codiub.enderecos.service;
+
+import java.util.Date;
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+
+import br.com.codiub.enderecos.entity.Cidades;
+import br.com.codiub.enderecos.entity.Estados;
+import br.com.codiub.enderecos.input.CidadesInput;
+import br.com.codiub.enderecos.repository.CidadesRepository;
+import br.com.codiub.enderecos.repository.EstadosRepository;
+
+@Service
+public class CidadesService {
+
+	@Autowired private CidadesRepository cidadesRepository;
+
+	//AA
+	@Autowired private EstadosRepository estadosRepository;
+
+//	public Cidades atualizar(Long codigo, Cidades cidades) {
+//		Cidades cidadesSalva = buscarPeloCodigo(codigo);
+//
+//		BeanUtils.copyProperties(cidades, cidadesSalva, "id");
+//		return cidadesRepository.save(cidadesSalva);
+//	}
+
+	public Cidades atualizar(Long codigo, CidadesInput cidadesInput) {
+		Cidades cidadesSalva = buscarPeloCodigo(cidadesInput.getId());
+
+		BeanUtils.copyProperties(cidadesInput, cidadesSalva, "id");
+		Estados estados = estadosRepository.findById(cidadesInput.getEstadosId()).get();
+		cidadesSalva.setEstados(estados);
+		
+		return cidadesRepository.save(cidadesSalva);
+	}
+	
+	public Cidades buscarPeloCodigo(Long codigo) {
+		Optional<Cidades> cidadesSalva = cidadesRepository.findById(codigo);
+		if (cidadesSalva == null) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		return cidadesSalva.get();
+	}
+
+	// AA	
+	public Cidades save(CidadesInput cidadesInput) {
+
+		Cidades cidades = new Cidades();
+		BeanUtils.copyProperties(cidadesInput, cidades, "id");
+
+		//BUSCO ESTADO E INSIRO NO CIDADES
+		Estados estados = estadosRepository.findById(cidadesInput.getEstadosId()).get();
+		cidades.setDataAlteracao(new Date());
+		cidades.setEstados(estados);
+		
+		return cidadesRepository.save(cidades);	
+	}
+}

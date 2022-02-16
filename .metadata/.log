@@ -1,0 +1,395 @@
+!SESSION 2020-12-16 08:59:23.314 -----------------------------------------------
+eclipse.buildId=4.8.1.202010230733
+java.version=15
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pt_BR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springframework.boot.ide.branding.sts4
+
+This is a continuation of log file C:\Users\antonio.aguiar\Documents\workspace-spring-tool-suite-4-4.8.1.RELEASE\.metadata\.bak_0.log
+Created Time: 2020-12-16 10:02:06.742
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-16 10:02:06.763
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-16 10:24:10.532
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:38.155
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.oyjsDXGx
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:38.166
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.oyjsDXGx
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:38.172
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:38.177
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.oyjsDXGx => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:41.728
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:41.734
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@6f4ccc8[org.springframework.tooling.boot.ls:1.23.0.202010230633(id=673)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:41.740
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.eclipse.lsp4e 2 0 2020-12-16 11:18:54.592
+!MESSAGE Timeout waiting for data to generate LS hover
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1950)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2085)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:70)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.442
+!MESSAGE Boot LS startup time from start to initialized: 13697ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.667
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.DBgSlXcAisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.673
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.679
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.685
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.690
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.DBgSlXcA => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.697
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.737
+!MESSAGE classpath=136 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.748
+!MESSAGE buffering callback sts4.classpath.DBgSlXcA enderecos-api false 136
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.753
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.781
+!MESSAGE classpath=65 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.791
+!MESSAGE buffering callback sts4.classpath.DBgSlXcA Esquadro false 65
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.797
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.852
+!MESSAGE classpath=112 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.866
+!MESSAGE buffering callback sts4.classpath.DBgSlXcA algamoney-api false 112
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:55.873
+!MESSAGE executing callback sts4.classpath.DBgSlXcA 3 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-16 11:18:56.069
+!MESSAGE executing callback sts4.classpath.DBgSlXcA SUCCESS [done]
+
+!ENTRY org.eclipse.lsp4e 4 0 2020-12-17 09:16:04.819
+!MESSAGE 
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1950)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2085)
+	at org.eclipse.lsp4e.operations.declaration.OpenDeclarationHyperlinkDetector.detectHyperlinks(OpenDeclarationHyperlinkDetector.java:90)
+	at org.eclipse.ui.texteditor.HyperlinkDetectorRegistry$HyperlinkDetectorDelegate.detectHyperlinks(HyperlinkDetectorRegistry.java:81)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:289)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:262)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.mouseMove(HyperlinkManager.java:457)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:216)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4195)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1037)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4012)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3612)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1157)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:153)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY org.eclipse.lsp4e 4 0 2020-12-17 09:16:06.858
+!MESSAGE 
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1950)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2085)
+	at org.eclipse.lsp4e.operations.documentLink.DocumentLinkDetector.detectHyperlinks(DocumentLinkDetector.java:121)
+	at org.eclipse.ui.texteditor.HyperlinkDetectorRegistry$HyperlinkDetectorDelegate.detectHyperlinks(HyperlinkDetectorRegistry.java:81)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:289)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:262)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.mouseMove(HyperlinkManager.java:457)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:216)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4195)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1037)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4012)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3612)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1157)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:153)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-17 09:17:27.542
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-17 09:18:21.410
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-17 09:19:54.788
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-17 09:19:57.211
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-17 14:28:28.169
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.DBgSlXcA
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-17 14:28:28.181
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.DBgSlXcA
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-17 14:28:28.188
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-17 14:28:28.195
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.DBgSlXcA => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:05.859
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:05.901
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@6f4ccc8[org.springframework.tooling.boot.ls:1.23.0.202010230633(id=673)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:05.909
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.047
+!MESSAGE Boot LS startup time from start to initialized: 16120ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.409
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.gztgrzWQisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.431
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.440
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.450
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.456
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.gztgrzWQ => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.466
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.653
+!MESSAGE classpath=136 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.680
+!MESSAGE buffering callback sts4.classpath.gztgrzWQ enderecos-api false 136
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.690
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.743
+!MESSAGE classpath=65 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.756
+!MESSAGE buffering callback sts4.classpath.gztgrzWQ Esquadro false 65
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:22.763
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:23.232
+!MESSAGE classpath=112 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:23.264
+!MESSAGE buffering callback sts4.classpath.gztgrzWQ algamoney-api false 112
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:23.269
+!MESSAGE executing callback sts4.classpath.gztgrzWQ 3 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-22 08:40:23.383
+!MESSAGE executing callback sts4.classpath.gztgrzWQ SUCCESS [done]
+
+!ENTRY org.eclipse.lsp4e 2 0 2020-12-22 08:41:08.578
+!MESSAGE Timeout waiting for data to generate LS hover
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1950)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2085)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:70)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 08:47:04.783
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 08:51:34.153
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 08:54:42.013
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.lsp4e 2 0 2020-12-22 08:55:33.411
+!MESSAGE Timeout waiting for data to generate LS hover
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1950)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2085)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:70)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 08:55:44.647
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 08:57:08.005
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 08:57:45.162
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 08:58:34.572
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 09:03:05.834
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 09:03:10.456
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.lsp4e 4 0 2020-12-22 09:07:50.061
+!MESSAGE org.eclipse.lsp4j.jsonrpc.ResponseErrorException: Internal error.
+!STACK 0
+java.util.concurrent.ExecutionException: org.eclipse.lsp4j.jsonrpc.ResponseErrorException: Internal error.
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2086)
+	at org.eclipse.lsp4e.operations.declaration.OpenDeclarationHyperlinkDetector.detectHyperlinks(OpenDeclarationHyperlinkDetector.java:90)
+	at org.eclipse.ui.texteditor.HyperlinkDetectorRegistry$HyperlinkDetectorDelegate.detectHyperlinks(HyperlinkDetectorRegistry.java:81)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:289)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:262)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.mouseMove(HyperlinkManager.java:457)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:216)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4195)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1037)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4012)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3612)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1157)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:153)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+Caused by: org.eclipse.lsp4j.jsonrpc.ResponseErrorException: Internal error.
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleResponse(RemoteEndpoint.java:209)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:193)
+	at org.eclipse.lsp4e.LanguageServerWrapper.lambda$2(LanguageServerWrapper.java:250)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 09:08:29.853
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 09:09:56.003
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 09:46:51.291
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 09:47:05.756
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 09:47:14.910
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.eclipse.jdt.apt.pluggable.core 1 1 2020-12-22 09:47:22.915
+!MESSAGE Hibernate JPA 2 Static-Metamodel Generator 5.4.23.Final
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-23 12:07:25.851
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.gztgrzWQ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-23 12:07:25.863
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.gztgrzWQ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-23 12:07:25.870
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-12-23 12:07:25.885
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.gztgrzWQ => OK
+                                                                                                                                                                                                                                                                                                                       

@@ -1,0 +1,59 @@
+<!-- CTRL + SHIFT + F for pretty --><app-bread-crumb [items]="[{label: 'Estados', routerLink:'/estados'}, {label: pageTitle}]"></app-bread-crumb>
+
+<div class="margin">
+
+  <p-panel header="Preencha o Formulario:">
+
+    <form [formGroup]="resourceForm" (submit)="submitForm()" >
+
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+
+			<div class="p-col-12 p-md-1 p-lg-1">
+	  			<label for="id" >Id</label>
+	  			<input id="id" type="text" disabled pInputText formControlName="id">
+  			<app-form-field-error [form-control]="resourceForm.get('id')" header-colum="Id"></app-form-field-error>
+      </div>
+
+      <div class="p-col-12 p-md-3 p-lg-3" formGroupName="paises">
+        <label for="pais" >País</label>
+        <p-dropdown id="pais" name="pais" [options]="paisList" placeholder="Selecione"
+         [filter]="true" formControlName="id"></p-dropdown>
+      </div>
+
+      <div class="p-col-12 p-md-4 p-lg-4">
+	  			<label for="nome" >Nome</label>
+	  			<input id="nome" type="text" size="50" pInputText formControlName="nome">
+  				<app-form-field-error [form-control]="resourceForm.get('nome')" header-colum="Nome"></app-form-field-error>
+			</div>
+
+			<div class="p-col-12 p-md-1 p-lg-1">
+	  			<label for="sigla" >Sigla</label>
+	  			<input id="sigla" type="text" size="30" pInputText formControlName="sigla">
+  				<app-form-field-error [form-control]="resourceForm.get('sigla')" header-colum="Sigla"></app-form-field-error>
+      </div>
+
+      <div class="p-col-12 p-md-1 p-lg-1">
+        <label for="codigoInep" >Código INEP</label>
+        <input id="codigoInep" type="number" size="30" pInputText formControlName="codigoInep">
+      <app-form-field-error [form-control]="resourceForm.get('codigoInep')" header-colum="CodigoInep"></app-form-field-error>
+    </div>
+
+      </div>
+
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+
+
+          <div class="p-col-12 p-md-2 p-lg-2">
+              <button pButton type="button" label="Voltar" routerLink="/estados"  class="ui-button-danger"></button>
+            </div>
+
+          <div class="p-col-12 p-md-2 p-lg-2">
+            <button pButton type="button" [disabled]="submittingForm || resourceForm.invalid" type="submit"
+            icon="pi pi-check" label="Salvar" class="ui-button-success"></button>
+          </div>
+
+      </div>
+
+    </form>
+  </p-panel>
+</div>

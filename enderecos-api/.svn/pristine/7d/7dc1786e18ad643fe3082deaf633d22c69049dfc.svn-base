@@ -1,0 +1,81 @@
+package br.com.codiub.enderecos.service;
+
+import java.util.Date;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import br.com.codiub.enderecos.entity.Bairros;
+import br.com.codiub.enderecos.entity.DadosBairros;
+import br.com.codiub.enderecos.entity.Distritos;
+import br.com.codiub.enderecos.input.BairrosInput;
+import br.com.codiub.enderecos.repository.BairrosRepository;
+import br.com.codiub.enderecos.repository.DadosBairrosRepository;
+import br.com.codiub.enderecos.repository.DistritosRepository;
+
+@Service
+public class BairrosService {
+	
+	//Adamis 24022021
+	@Autowired private BairrosRepository bairrosRepository;
+	@Autowired private DadosBairrosRepository dadosBairrosRepository;
+	@Autowired private DistritosRepository distritosRepository;
+
+	
+	public Bairros atualizar(Long codigo, Bairros bairros) {
+		Bairros bairrosSalva = buscarPeloCodigo(codigo);
+
+		BeanUtils.copyProperties(bairros, bairrosSalva, "id");
+		return bairrosRepository.save(bairrosSalva);
+	}
+
+	public Bairros buscarPeloCodigo(Long codigo) {
+		Optional<Bairros> bairrosSalva = bairrosRepository.findById(codigo);
+		if (bairrosSalva == null) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		return bairrosSalva.get();
+	}
+	
+	// Adamis 24022021
+	@Transactional
+	public ResponseEntity<Object> save(BairrosInput bairrosInput) {
+
+		//BAIRRO
+		Bairros bairrosSalva = new Bairros();
+		BeanUtils.copyProperties(bairrosInput, bairrosSalva , "id");
+
+		Distritos distritos = distritosRepository.findById(bairrosInput.getDistritos().getId()).get();
+		bairrosSalva.setDistritos(distritos);
+		
+		bairrosSalva.setDataAlteracao(new Date());
+		
+		Bairros bairroSave = bairrosRepository.save(bairrosSalva);
+		
+			// DADOS BAIRROS
+			DadosBairros dadosBairros = new DadosBairros();
+			
+			if(bairrosInput.getDadosBairros() != null) {
+				BeanUtils.copyProperties(bairrosInput.getDadosBairros(), dadosBairros);
+				dadosBairros.setDataAlteracao(new Date());
+			}			
+
+			System.err.println("bairro ID: "+bairroSave.getId());
+			dadosBairros.setBairros(bairroSave);
+
+			DadosBairros save = dadosBairrosRepository.save(dadosBairros);
+			
+			System.err.println("DadosBairros Bairro: "+save.getBairros().getId());
+			System.err.println("DadosBairros ID: "+save.getId());
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(bairroSave);
+
+	}
+}

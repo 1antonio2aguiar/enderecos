@@ -1,0 +1,24 @@
+package br.com.codiub.enderecos.input;
+
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
+public class DadosBairrosInput {
+	
+	//Adamis 24022021
+	private Date dataCriacao;
+	private String leiCriacao;
+	private Date dataDecreto;
+	private String decreto;
+	private Date dataPortaria;
+	private String portaria;
+	private Long pessoaVereador;
+	private Long pessoaLoteadora;
+	private String nomePopular;
+	private String zonaRural;
+	private String usuario;
+	private String vwPessoas;
+	//private Date dataAlteracao;
+}

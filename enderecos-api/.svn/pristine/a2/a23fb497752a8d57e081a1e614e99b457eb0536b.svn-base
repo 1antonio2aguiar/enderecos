@@ -1,0 +1,60 @@
+<!-- CTRL + SHIFT + F for pretty --><app-bread-crumb [items]="[{label: 'VwPessoas', routerLink:'/vw-pessoas'}, {label: pageTitle}]"></app-bread-crumb>
+ 
+<div class="margin">
+ 
+  <p-panel header="Preencha o Formulario:">
+ 
+    <form [formGroup]="resourceForm" (submit)="submitForm()" >
+ 
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+ 
+			<div class="p-col-12 p-md-2 p-lg-2">
+	  			<label for="cnpj" >Cnpj</label>
+	  			<input id="cnpj" type="number" size="30" pInputText formControlName="cnpj">
+  			<app-form-field-error [form-control]="resourceForm.get('cnpj')" header-colum="Cnpj"></app-form-field-error>
+			</div>
+			<div class="p-col-12 p-md-2 p-lg-2">
+	  			<label for="cpf" >Cpf</label>
+	  			<input id="cpf" type="number" size="30" pInputText formControlName="cpf">
+  			<app-form-field-error [form-control]="resourceForm.get('cpf')" header-colum="Cpf"></app-form-field-error>
+			</div>
+			<div class="p-col-12 p-md-6 p-lg-6">
+	  			<label for="fisicaJuridica" >Fisicajuridica</label>
+	  			<input id="fisicaJuridica" type="text" size="30" pInputText formControlName="fisicaJuridica">
+  				<app-form-field-error [form-control]="resourceForm.get('fisicaJuridica')" header-colum="FisicaJuridica"></app-form-field-error>
+			</div>
+			<div class="p-col-12 p-md-2 p-lg-2">
+	  			<label for="id" >Id</label>
+	  			<input id="id" type="number" size="30" pInputText formControlName="id">
+  			<app-form-field-error [form-control]="resourceForm.get('id')" header-colum="Id"></app-form-field-error>
+			</div>
+			<div class="p-col-12 p-md-6 p-lg-6">
+	  			<label for="nome" >Nome</label>
+	  			<input id="nome" type="text" size="30" pInputText formControlName="nome">
+  				<app-form-field-error [form-control]="resourceForm.get('nome')" header-colum="Nome"></app-form-field-error>
+			</div>
+			<div class="p-col-12 p-md-6 p-lg-6">
+	  			<label for="situacao" >Situacao</label>
+	  			<input id="situacao" type="text" size="30" pInputText formControlName="situacao">
+  				<app-form-field-error [form-control]="resourceForm.get('situacao')" header-colum="Situacao"></app-form-field-error>
+			</div>
+ 
+      </div>
+ 
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+ 
+ 
+          <div class="p-col-12 p-md-2 p-lg-2">
+              <button pButton type="button" label="Voltar" routerLink="/vw-pessoas"  class="ui-button-danger"></button>
+            </div>
+ 
+          <div class="p-col-12 p-md-2 p-lg-2">
+            <button pButton type="button" [disabled]="submittingForm || resourceForm.invalid" type="submit"
+            icon="pi pi-check" label="Salvar" class="ui-button-success"></button>
+          </div>
+ 
+      </div>
+ 
+    </form>
+  </p-panel>
+</div>

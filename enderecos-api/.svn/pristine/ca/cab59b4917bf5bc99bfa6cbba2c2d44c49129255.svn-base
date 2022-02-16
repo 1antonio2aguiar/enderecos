@@ -1,0 +1,16 @@
+package br.com.codiub.enderecos.input;
+
+import br.com.codiub.enderecos.entity.Distritos;
+import lombok.Data;
+
+@Data
+public class BairrosInput {
+	
+	//Adamis 24022021
+	private Distritos distritos;
+	private String nome;
+	private String nomeAbreviado;
+	private String usuario;
+	//private Date dataAlteracao;
+	private DadosBairrosInput dadosBairros;
+}

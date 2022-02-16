@@ -1,0 +1,32 @@
+package br.com.codiub.enderecos.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+
+import br.com.codiub.enderecos.entity.Distritos;
+import br.com.codiub.enderecos.repository.DistritosRepository;
+
+@Service
+public class DistritosService {
+
+  @Autowired private DistritosRepository distritosRepository;
+
+  public Distritos atualizar(Long codigo, Distritos distritos) {
+    Distritos distritosSalva = buscarPeloCodigo(codigo);
+
+    BeanUtils.copyProperties(distritos, distritosSalva, "id");
+    return distritosRepository.save(distritosSalva);
+  }
+
+  public Distritos buscarPeloCodigo(Long codigo) {
+    Optional<Distritos> distritosSalva = distritosRepository.findById(codigo);
+    if (distritosSalva == null) {
+      throw new EmptyResultDataAccessException(1);
+    }
+    return distritosSalva.get();
+  }
+}

@@ -1,0 +1,32 @@
+package br.com.codiub.enderecos.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+
+import br.com.codiub.enderecos.entity.Ceps;
+import br.com.codiub.enderecos.repository.CepsRepository;
+
+@Service
+public class CepsService {
+
+  @Autowired private CepsRepository cepsRepository;
+
+  public Ceps atualizar(Long codigo, Ceps ceps) {
+    Ceps cepsSalva = buscarPeloCodigo(codigo);
+
+    BeanUtils.copyProperties(ceps, cepsSalva, "id");
+    return cepsRepository.save(cepsSalva);
+  }
+
+  public Ceps buscarPeloCodigo(Long codigo) {
+    Optional<Ceps> cepsSalva = cepsRepository.findById(codigo);
+    if (cepsSalva == null) {
+      throw new EmptyResultDataAccessException(1);
+    }
+    return cepsSalva.get();
+  }
+}

@@ -1,0 +1,12 @@
+package br.com.codiub.enderecos.input;
+
+import lombok.Data;
+
+@Data
+public class EstadosInput {	
+	private Long id;
+	private PaisesInput paises;
+	private String nome;
+	private String sigla;
+	private Long codigoInep;
+}

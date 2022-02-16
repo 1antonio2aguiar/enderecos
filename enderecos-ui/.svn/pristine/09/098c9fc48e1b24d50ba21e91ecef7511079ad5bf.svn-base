@@ -1,0 +1,60 @@
+<!-- CTRL + SHIFT + F for pretty --><app-bread-crumb [items]="[{label: 'Distritos', routerLink:'/distritos'}, {label: pageTitle}]"></app-bread-crumb>
+ 
+<div class="margin">
+ 
+  <p-panel header="Preencha o Formulario:">
+ 
+    <form [formGroup]="resourceForm" (submit)="submitForm()" >
+ 
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+ 
+ <div class="p-col-12 p-md-6 p-lg-6" formGroupName="cidade"> 
+ 	<label for="cidade" >Cidade</label> 
+ 	<p-dropdown id="cidade" name="cidade" [options]="cidadeList" placeholder="Selecione" 
+ 	 [filter]="true" formControlName="id"></p-dropdown> 
+ </div> 
+			<div class="p-col-12 p-md-2 p-lg-2">
+	  			<label for="codigoInep" >Codigoinep</label>
+	  			<input id="codigoInep" type="number" size="30" pInputText formControlName="codigoInep">
+  			<app-form-field-error [form-control]="resourceForm.get('codigoInep')" header-colum="CodigoInep"></app-form-field-error>
+			</div>
+			<div class="p-col-12 p-md-2 p-lg-2">
+	  			<label for="dataAlteracao" >Dataalteracao</label>
+	  			<p-calendar id="dataAlteracao" [showIcon]="true" dateFormat="dd/mm/yy" [showTime]="true" showButtonBar="true" formControlName="dataAlteracao"></p-calendar>
+  				<app-form-field-error [form-control]="resourceForm.get('dataAlteracao')" header-colum="DataAlteracao"></app-form-field-error>
+			</div>
+			<div class="p-col-12 p-md-2 p-lg-2">
+	  			<label for="id" >Id</label>
+	  			<input id="id" type="number" size="30" pInputText formControlName="id">
+  			<app-form-field-error [form-control]="resourceForm.get('id')" header-colum="Id"></app-form-field-error>
+			</div>
+			<div class="p-col-12 p-md-6 p-lg-6">
+	  			<label for="nome" >Nome</label>
+	  			<input id="nome" type="text" size="30" pInputText formControlName="nome">
+  				<app-form-field-error [form-control]="resourceForm.get('nome')" header-colum="Nome"></app-form-field-error>
+			</div>
+			<div class="p-col-12 p-md-6 p-lg-6">
+	  			<label for="usuario" >Usuario</label>
+	  			<input id="usuario" type="text" size="30" pInputText formControlName="usuario">
+  				<app-form-field-error [form-control]="resourceForm.get('usuario')" header-colum="Usuario"></app-form-field-error>
+			</div>
+ 
+      </div>
+ 
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+ 
+ 
+          <div class="p-col-12 p-md-2 p-lg-2">
+              <button pButton type="button" label="Voltar" routerLink="/distritos"  class="ui-button-danger"></button>
+            </div>
+ 
+          <div class="p-col-12 p-md-2 p-lg-2">
+            <button pButton type="button" [disabled]="submittingForm || resourceForm.invalid" type="submit"
+            icon="pi pi-check" label="Salvar" class="ui-button-success"></button>
+          </div>
+ 
+      </div>
+ 
+    </form>
+  </p-panel>
+</div>

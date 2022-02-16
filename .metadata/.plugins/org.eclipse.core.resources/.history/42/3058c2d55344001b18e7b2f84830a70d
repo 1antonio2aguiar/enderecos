@@ -1,0 +1,15 @@
+package br.com.codiub.enderecos.filter;
+
+import lombok.Data;
+import java.util.Date;
+import java.math.BigDecimal;
+
+@Data
+public class BairrosFilter {
+  private Date dataAlteracao;
+  private DistritosFilter distritos;
+  private BigDecimal id;
+  private String nome;
+  private String nomeAbreviado;
+  private String usuario;
+}

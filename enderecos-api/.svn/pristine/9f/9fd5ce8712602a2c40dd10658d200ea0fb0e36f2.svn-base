@@ -1,0 +1,1009 @@
+package br.com.codiub.enderecos.repository.ceps;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.query.QueryUtils;
+import org.springframework.util.StringUtils;
+
+import br.com.codiub.enderecos.entity.Bairros_;
+import br.com.codiub.enderecos.entity.Ceps;
+import br.com.codiub.enderecos.entity.Ceps_;
+import br.com.codiub.enderecos.entity.Cidades_;
+import br.com.codiub.enderecos.entity.Distritos_;
+import br.com.codiub.enderecos.entity.Estados_;
+import br.com.codiub.enderecos.entity.Logradouros_;
+import br.com.codiub.enderecos.entity.Paises_;
+import br.com.codiub.enderecos.entity.TiposLogradouros_;
+import br.com.codiub.enderecos.filter.CepsFilter;
+
+public class CepsRepositoryImpl implements CepsRepositoryQuery {
+
+  @PersistenceContext private EntityManager manager;
+
+  @Override
+  public Page<Ceps> filtrar(CepsFilter cepsFilter, Pageable pageable) {
+    CriteriaBuilder builder = manager.getCriteriaBuilder();
+    CriteriaQuery<Ceps> criteria = builder.createQuery(Ceps.class);
+    Root<Ceps> root = criteria.from(Ceps.class);
+
+    List<Order> orders = QueryUtils.toOrders(pageable.getSort(), root, builder);
+
+    Predicate[] predicates = criarRestricoes(cepsFilter, builder, root);
+    criteria.where(predicates).orderBy(orders);
+
+    TypedQuery<Ceps> query = manager.createQuery(criteria);
+    adicionarRestricoesDePaginacao(query, pageable);
+
+    return new PageImpl<>(query.getResultList(), pageable, total(cepsFilter));
+  }
+
+  private Predicate[] criarRestricoes(
+      CepsFilter cepsFilter, CriteriaBuilder builder, Root<Ceps> root) {
+    List<Predicate> predicates = new ArrayList<>();
+
+    // BAIRRO
+    if (cepsFilter.getBairrosFilter() != null) {
+      
+
+      // DISTRITO
+      if (cepsFilter.getBairrosFilter().getDistritosFilter() != null) {
+        // CIDADE
+        if (cepsFilter.getBairrosFilter().getDistritosFilter().getCidadesFilter() != null) {
+          // CODIGO_IBGE
+          if (cepsFilter.getBairrosFilter().getDistritosFilter().getCidadesFilter().getCodigoIbge()
+              != null) {
+            predicates.add(
+                builder.equal(
+                    root.get(Ceps_.BAIRROS)
+                        .get(Bairros_.DISTRITOS)
+                        .get(Distritos_.CIDADES)
+                        .get(Cidades_.CODIGO_IBGE),
+                    cepsFilter
+                        .getBairrosFilter()
+                        .getDistritosFilter()
+                        .getCidadesFilter()
+                        .getCodigoIbge()));
+          }
+          // CODIGO_INEP
+          if (cepsFilter.getBairrosFilter().getDistritosFilter().getCidadesFilter().getCodigoInep()
+              != null) {
+            predicates.add(
+                builder.equal(
+                    root.get(Ceps_.BAIRROS)
+                        .get(Bairros_.DISTRITOS)
+                        .get(Distritos_.CIDADES)
+                        .get(Cidades_.CODIGO_INEP),
+                    cepsFilter
+                        .getBairrosFilter()
+                        .getDistritosFilter()
+                        .getCidadesFilter()
+                        .getCodigoInep()));
+          }
+          // CODIGO_SICOM
+          if (cepsFilter.getBairrosFilter().getDistritosFilter().getCidadesFilter().getCodigoSicom()
+              != null) {
+            predicates.add(
+                builder.equal(
+                    root.get(Ceps_.BAIRROS)
+                        .get(Bairros_.DISTRITOS)
+                        .get(Distritos_.CIDADES)
+                        .get(Cidades_.CODIGO_SICOM),
+                    cepsFilter
+                        .getBairrosFilter()
+                        .getDistritosFilter()
+                        .getCidadesFilter()
+                        .getCodigoSicom()));
+          }
+          
+
+          // ESTADO
+          if (cepsFilter
+                  .getBairrosFilter()
+                  .getDistritosFilter()
+                  .getCidadesFilter()
+                  .getEstadosFilter()
+              != null) {
+            // CODIGO_INEP
+            if (cepsFilter
+                    .getBairrosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getCodigoInep()
+                != null) {
+              predicates.add(
+                  builder.equal(
+                      root.get(Ceps_.BAIRROS)
+                          .get(Bairros_.DISTRITOS)
+                          .get(Distritos_.CIDADES)
+                          .get(Cidades_.ESTADOS)
+                          .get(Estados_.CODIGO_INEP),
+                      cepsFilter
+                          .getBairrosFilter()
+                          .getDistritosFilter()
+                          .getCidadesFilter()
+                          .getEstadosFilter()
+                          .getCodigoInep()));
+            }
+            // ID
+            if (cepsFilter
+                    .getBairrosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getId()
+                != null) {
+              predicates.add(
+                  builder.equal(
+                      root.get(Ceps_.BAIRROS)
+                          .get(Bairros_.DISTRITOS)
+                          .get(Distritos_.CIDADES)
+                          .get(Cidades_.ESTADOS)
+                          .get(Estados_.ID),
+                      cepsFilter
+                          .getBairrosFilter()
+                          .getDistritosFilter()
+                          .getCidadesFilter()
+                          .getEstadosFilter()
+                          .getId()));
+            }
+            // NOME
+            if (StringUtils.hasLength(
+                cepsFilter
+                    .getBairrosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getNome())) {
+              predicates.add(
+                  builder.like(
+                      builder.lower(
+                          root.get(Ceps_.BAIRROS)
+                              .get(Bairros_.DISTRITOS)
+                              .get(Distritos_.CIDADES)
+                              .get(Cidades_.ESTADOS)
+                              .get(Estados_.NOME)),
+                      "%"
+                          + cepsFilter
+                              .getBairrosFilter()
+                              .getDistritosFilter()
+                              .getCidadesFilter()
+                              .getEstadosFilter()
+                              .getNome()
+                              .toLowerCase()
+                          + "%"));
+            }
+
+            // PAIS
+            if (cepsFilter
+                    .getBairrosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getPaisesFilter()
+                != null) {
+              // CODIGO_INEP
+              if (cepsFilter
+                      .getBairrosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getCodigoInep()
+                  != null) {
+                predicates.add(
+                    builder.equal(
+                        root.get(Ceps_.BAIRROS)
+                            .get(Bairros_.DISTRITOS)
+                            .get(Distritos_.CIDADES)
+                            .get(Cidades_.ESTADOS)
+                            .get(Estados_.PAISES)
+                            .get(Paises_.CODIGO_INEP),
+                        cepsFilter
+                            .getBairrosFilter()
+                            .getDistritosFilter()
+                            .getCidadesFilter()
+                            .getEstadosFilter()
+                            .getPaisesFilter()
+                            .getCodigoInep()));
+              }
+              // ID
+              if (cepsFilter
+                      .getBairrosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getId()
+                  != null) {
+                predicates.add(
+                    builder.equal(
+                        root.get(Ceps_.BAIRROS)
+                            .get(Bairros_.DISTRITOS)
+                            .get(Distritos_.CIDADES)
+                            .get(Cidades_.ESTADOS)
+                            .get(Estados_.PAISES)
+                            .get(Paises_.ID),
+                        cepsFilter
+                            .getBairrosFilter()
+                            .getDistritosFilter()
+                            .getCidadesFilter()
+                            .getEstadosFilter()
+                            .getPaisesFilter()
+                            .getId()));
+              }
+              // NACIONALIDADE
+              if (StringUtils.hasLength(
+                  cepsFilter
+                      .getBairrosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getNacionalidade())) {
+                predicates.add(
+                    builder.like(
+                        builder.lower(
+                            root.get(Ceps_.BAIRROS)
+                                .get(Bairros_.DISTRITOS)
+                                .get(Distritos_.CIDADES)
+                                .get(Cidades_.ESTADOS)
+                                .get(Estados_.PAISES)
+                                .get(Paises_.NACIONALIDADE)),
+                        "%"
+                            + cepsFilter
+                                .getBairrosFilter()
+                                .getDistritosFilter()
+                                .getCidadesFilter()
+                                .getEstadosFilter()
+                                .getPaisesFilter()
+                                .getNacionalidade()
+                                .toLowerCase()
+                            + "%"));
+              }
+
+              // NOME
+              if (StringUtils.hasLength(
+                  cepsFilter
+                      .getBairrosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getNome())) {
+                predicates.add(
+                    builder.like(
+                        builder.lower(
+                            root.get(Ceps_.BAIRROS)
+                                .get(Bairros_.DISTRITOS)
+                                .get(Distritos_.CIDADES)
+                                .get(Cidades_.ESTADOS)
+                                .get(Estados_.PAISES)
+                                .get(Paises_.NOME)),
+                        "%"
+                            + cepsFilter
+                                .getBairrosFilter()
+                                .getDistritosFilter()
+                                .getCidadesFilter()
+                                .getEstadosFilter()
+                                .getPaisesFilter()
+                                .getNome()
+                                .toLowerCase()
+                            + "%"));
+              }
+
+              // SIGLA
+              if (StringUtils.hasLength(
+                  cepsFilter
+                      .getBairrosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getSigla())) {
+                predicates.add(
+                    builder.like(
+                        builder.lower(
+                            root.get(Ceps_.BAIRROS)
+                                .get(Bairros_.DISTRITOS)
+                                .get(Distritos_.CIDADES)
+                                .get(Cidades_.ESTADOS)
+                                .get(Estados_.PAISES)
+                                .get(Paises_.SIGLA)),
+                        "%"
+                            + cepsFilter
+                                .getBairrosFilter()
+                                .getDistritosFilter()
+                                .getCidadesFilter()
+                                .getEstadosFilter()
+                                .getPaisesFilter()
+                                .getSigla()
+                                .toLowerCase()
+                            + "%"));
+              }
+            }
+
+            // SIGLA
+            if (StringUtils.hasLength(
+                cepsFilter
+                    .getBairrosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getSigla())) {
+              predicates.add(
+                  builder.like(
+                      builder.lower(
+                          root.get(Ceps_.BAIRROS)
+                              .get(Bairros_.DISTRITOS)
+                              .get(Distritos_.CIDADES)
+                              .get(Cidades_.ESTADOS)
+                              .get(Estados_.SIGLA)),
+                      "%"
+                          + cepsFilter
+                              .getBairrosFilter()
+                              .getDistritosFilter()
+                              .getCidadesFilter()
+                              .getEstadosFilter()
+                              .getSigla()
+                              .toLowerCase()
+                          + "%"));
+            }
+          }
+
+          // ID
+          if (cepsFilter.getBairrosFilter().getDistritosFilter().getCidadesFilter().getId()
+              != null) {
+            predicates.add(
+                builder.equal(
+                    root.get(Ceps_.BAIRROS)
+                        .get(Bairros_.DISTRITOS)
+                        .get(Distritos_.CIDADES)
+                        .get(Cidades_.ID),
+                    cepsFilter.getBairrosFilter().getDistritosFilter().getCidadesFilter().getId()));
+          }
+          // NOME
+          if (StringUtils.hasLength(
+              cepsFilter.getBairrosFilter().getDistritosFilter().getCidadesFilter().getNome())) {
+            predicates.add(
+                builder.like(
+                    builder.lower(
+                        root.get(Ceps_.BAIRROS)
+                            .get(Bairros_.DISTRITOS)
+                            .get(Distritos_.CIDADES)
+                            .get(Cidades_.NOME)),
+                    "%"
+                        + cepsFilter
+                            .getBairrosFilter()
+                            .getDistritosFilter()
+                            .getCidadesFilter()
+                            .getNome()
+                            .toLowerCase()
+                        + "%"));
+          }
+
+          // SIGLA
+          if (StringUtils.hasLength(
+              cepsFilter.getBairrosFilter().getDistritosFilter().getCidadesFilter().getSigla())) {
+            predicates.add(
+                builder.like(
+                    builder.lower(
+                        root.get(Ceps_.BAIRROS)
+                            .get(Bairros_.DISTRITOS)
+                            .get(Distritos_.CIDADES)
+                            .get(Cidades_.SIGLA)),
+                    "%"
+                        + cepsFilter
+                            .getBairrosFilter()
+                            .getDistritosFilter()
+                            .getCidadesFilter()
+                            .getSigla()
+                            .toLowerCase()
+                        + "%"));
+          }
+
+        }
+
+        // ID
+        if (cepsFilter.getBairrosFilter().getDistritosFilter().getId() != null) {
+          predicates.add(
+              builder.equal(
+                  root.get(Ceps_.BAIRROS).get(Bairros_.DISTRITOS).get(Distritos_.ID),
+                  cepsFilter.getBairrosFilter().getDistritosFilter().getId()));
+        }
+        // NOME
+        if (StringUtils.hasLength(cepsFilter.getBairrosFilter().getDistritosFilter().getNome())) {
+          predicates.add(
+              builder.like(
+                  builder.lower(root.get(Ceps_.BAIRROS).get(Bairros_.DISTRITOS).get(Distritos_.NOME)),
+                  "%"
+                      + cepsFilter.getBairrosFilter().getDistritosFilter().getNome().toLowerCase()
+                      + "%"));
+        }
+
+      }
+
+      // ID
+      if (cepsFilter.getBairrosFilter().getId() != null) {
+        predicates.add(
+            builder.equal(
+                root.get(Ceps_.BAIRROS).get(Bairros_.ID), cepsFilter.getBairrosFilter().getId()));
+      }
+      // NOME
+      if (StringUtils.hasLength(cepsFilter.getBairrosFilter().getNome())) {
+        predicates.add(
+            builder.like(
+                builder.lower(root.get(Ceps_.BAIRROS).get(Bairros_.NOME)),
+                "%" + cepsFilter.getBairrosFilter().getNome().toLowerCase() + "%"));
+      }
+
+      // NOME_ABREVIADO
+      if (StringUtils.hasLength(cepsFilter.getBairrosFilter().getNomeAbreviado())) {
+        predicates.add(
+            builder.like(
+                builder.lower(root.get(Ceps_.BAIRROS).get(Bairros_.NOME_ABREVIADO)),
+                "%" + cepsFilter.getBairrosFilter().getNomeAbreviado().toLowerCase() + "%"));
+      }
+      
+    }
+
+    // CEP
+    if (StringUtils.hasLength(cepsFilter.getCep())) {
+      predicates.add(
+          builder.like(
+              builder.lower(root.get(Ceps_.CEP)), "%" + cepsFilter.getCep().toLowerCase() + "%"));
+    }
+
+    // CODIGO_CORREIOS
+    if (cepsFilter.getCodigoCorreios() != null) {
+      predicates.add(
+          builder.equal(root.get(Ceps_.CODIGO_CORREIOS), cepsFilter.getCodigoCorreios()));
+    }
+
+    // ID
+    if (cepsFilter.getId() != null) {
+      predicates.add(builder.equal(root.get(Ceps_.ID), cepsFilter.getId()));
+    }
+    // IDENTIFICACAO
+    if (StringUtils.hasLength(cepsFilter.getIdentificacao())) {
+      predicates.add(
+          builder.like(
+              builder.lower(root.get(Ceps_.IDENTIFICACAO)),
+              "%" + cepsFilter.getIdentificacao().toLowerCase() + "%"));
+    }
+
+      // DISTRITO
+      if (cepsFilter.getLogradourosFilter().getDistritosFilter() != null) {
+        // CIDADE
+        if (cepsFilter.getLogradourosFilter().getDistritosFilter().getCidadesFilter() != null) {
+          // CODIGO_IBGE
+          if (cepsFilter
+                  .getLogradourosFilter()
+                  .getDistritosFilter()
+                  .getCidadesFilter()
+                  .getCodigoIbge()
+              != null) {
+            predicates.add(
+                builder.equal(
+                    root.get(Ceps_.LOGRADOUROS)
+                        .get(Logradouros_.DISTRITOS)
+                        .get(Distritos_.CIDADES)
+                        .get(Cidades_.CODIGO_IBGE),
+                    cepsFilter
+                        .getLogradourosFilter()
+                        .getDistritosFilter()
+                        .getCidadesFilter()
+                        .getCodigoIbge()));
+          }
+          // CODIGO_INEP
+          if (cepsFilter
+                  .getLogradourosFilter()
+                  .getDistritosFilter()
+                  .getCidadesFilter()
+                  .getCodigoInep()
+              != null) {
+            predicates.add(
+                builder.equal(
+                    root.get(Ceps_.LOGRADOUROS)
+                        .get(Logradouros_.DISTRITOS)
+                        .get(Distritos_.CIDADES)
+                        .get(Cidades_.CODIGO_INEP),
+                    cepsFilter
+                        .getLogradourosFilter()
+                        .getDistritosFilter()
+                        .getCidadesFilter()
+                        .getCodigoInep()));
+          }
+          // CODIGO_SICOM
+          if (cepsFilter
+                  .getLogradourosFilter()
+                  .getDistritosFilter()
+                  .getCidadesFilter()
+                  .getCodigoSicom()
+              != null) {
+            predicates.add(
+                builder.equal(
+                    root.get(Ceps_.LOGRADOUROS)
+                        .get(Logradouros_.DISTRITOS)
+                        .get(Distritos_.CIDADES)
+                        .get(Cidades_.CODIGO_SICOM),
+                    cepsFilter
+                        .getLogradourosFilter()
+                        .getDistritosFilter()
+                        .getCidadesFilter()
+                        .getCodigoSicom()));
+          }
+          
+
+          // ESTADO
+          if (cepsFilter
+                  .getLogradourosFilter()
+                  .getDistritosFilter()
+                  .getCidadesFilter()
+                  .getEstadosFilter()
+              != null) {
+            // CODIGO_INEP
+            if (cepsFilter
+                    .getLogradourosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getCodigoInep()
+                != null) {
+              predicates.add(
+                  builder.equal(
+                      root.get(Ceps_.LOGRADOUROS)
+                          .get(Logradouros_.DISTRITOS)
+                          .get(Distritos_.CIDADES)
+                          .get(Cidades_.ESTADOS)
+                          .get(Estados_.CODIGO_INEP),
+                      cepsFilter
+                          .getLogradourosFilter()
+                          .getDistritosFilter()
+                          .getCidadesFilter()
+                          .getEstadosFilter()
+                          .getCodigoInep()));
+            }
+            // ID
+            if (cepsFilter
+                    .getLogradourosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getId()
+                != null) {
+              predicates.add(
+                  builder.equal(
+                      root.get(Ceps_.LOGRADOUROS)
+                          .get(Logradouros_.DISTRITOS)
+                          .get(Distritos_.CIDADES)
+                          .get(Cidades_.ESTADOS)
+                          .get(Estados_.ID),
+                      cepsFilter
+                          .getLogradourosFilter()
+                          .getDistritosFilter()
+                          .getCidadesFilter()
+                          .getEstadosFilter()
+                          .getId()));
+            }
+            // NOME
+            if (StringUtils.hasLength(
+                cepsFilter
+                    .getLogradourosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getNome())) {
+              predicates.add(
+                  builder.like(
+                      builder.lower(
+                          root.get(Ceps_.LOGRADOUROS)
+                              .get(Logradouros_.DISTRITOS)
+                              .get(Distritos_.CIDADES)
+                              .get(Cidades_.ESTADOS)
+                              .get(Estados_.NOME)),
+                      "%"
+                          + cepsFilter
+                              .getLogradourosFilter()
+                              .getDistritosFilter()
+                              .getCidadesFilter()
+                              .getEstadosFilter()
+                              .getNome()
+                              .toLowerCase()
+                          + "%"));
+            }
+
+            // PAIS
+            if (cepsFilter
+                    .getLogradourosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getPaisesFilter()
+                != null) {
+              // CODIGO_INEP
+              if (cepsFilter
+                      .getLogradourosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getCodigoInep()
+                  != null) {
+                predicates.add(
+                    builder.equal(
+                        root.get(Ceps_.LOGRADOUROS)
+                            .get(Logradouros_.DISTRITOS)
+                            .get(Distritos_.CIDADES)
+                            .get(Cidades_.ESTADOS)
+                            .get(Estados_.PAISES)
+                            .get(Paises_.CODIGO_INEP),
+                        cepsFilter
+                            .getLogradourosFilter()
+                            .getDistritosFilter()
+                            .getCidadesFilter()
+                            .getEstadosFilter()
+                            .getPaisesFilter()
+                            .getCodigoInep()));
+              }
+              // ID
+              if (cepsFilter
+                      .getLogradourosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getId()
+                  != null) {
+                predicates.add(
+                    builder.equal(
+                        root.get(Ceps_.LOGRADOUROS)
+                            .get(Logradouros_.DISTRITOS)
+                            .get(Distritos_.CIDADES)
+                            .get(Cidades_.ESTADOS)
+                            .get(Estados_.PAISES)
+                            .get(Paises_.ID),
+                        cepsFilter
+                            .getLogradourosFilter()
+                            .getDistritosFilter()
+                            .getCidadesFilter()
+                            .getEstadosFilter()
+                            .getPaisesFilter()
+                            .getId()));
+              }
+              // NACIONALIDADE
+              if (StringUtils.hasLength(
+                  cepsFilter
+                      .getLogradourosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getNacionalidade())) {
+                predicates.add(
+                    builder.like(
+                        builder.lower(
+                            root.get(Ceps_.LOGRADOUROS)
+                                .get(Logradouros_.DISTRITOS)
+                                .get(Distritos_.CIDADES)
+                                .get(Cidades_.ESTADOS)
+                                .get(Estados_.PAISES)
+                                .get(Paises_.NACIONALIDADE)),
+                        "%"
+                            + cepsFilter
+                                .getLogradourosFilter()
+                                .getDistritosFilter()
+                                .getCidadesFilter()
+                                .getEstadosFilter()
+                                .getPaisesFilter()
+                                .getNacionalidade()
+                                .toLowerCase()
+                            + "%"));
+              }
+
+              // NOME
+              if (StringUtils.hasLength(
+                  cepsFilter
+                      .getLogradourosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getNome())) {
+                predicates.add(
+                    builder.like(
+                        builder.lower(
+                            root.get(Ceps_.LOGRADOUROS)
+                                .get(Logradouros_.DISTRITOS)
+                                .get(Distritos_.CIDADES)
+                                .get(Cidades_.ESTADOS)
+                                .get(Estados_.PAISES)
+                                .get(Paises_.NOME)),
+                        "%"
+                            + cepsFilter
+                                .getLogradourosFilter()
+                                .getDistritosFilter()
+                                .getCidadesFilter()
+                                .getEstadosFilter()
+                                .getPaisesFilter()
+                                .getNome()
+                                .toLowerCase()
+                            + "%"));
+              }
+
+              // SIGLA
+              if (StringUtils.hasLength(
+                  cepsFilter
+                      .getLogradourosFilter()
+                      .getDistritosFilter()
+                      .getCidadesFilter()
+                      .getEstadosFilter()
+                      .getPaisesFilter()
+                      .getSigla())) {
+                predicates.add(
+                    builder.like(
+                        builder.lower(
+                            root.get(Ceps_.LOGRADOUROS)
+                                .get(Logradouros_.DISTRITOS)
+                                .get(Distritos_.CIDADES)
+                                .get(Cidades_.ESTADOS)
+                                .get(Estados_.PAISES)
+                                .get(Paises_.SIGLA)),
+                        "%"
+                            + cepsFilter
+                                .getLogradourosFilter()
+                                .getDistritosFilter()
+                                .getCidadesFilter()
+                                .getEstadosFilter()
+                                .getPaisesFilter()
+                                .getSigla()
+                                .toLowerCase()
+                            + "%"));
+              }
+            }
+
+            // SIGLA
+            if (StringUtils.hasLength(
+                cepsFilter
+                    .getLogradourosFilter()
+                    .getDistritosFilter()
+                    .getCidadesFilter()
+                    .getEstadosFilter()
+                    .getSigla())) {
+              predicates.add(
+                  builder.like(
+                      builder.lower(
+                          root.get(Ceps_.LOGRADOUROS)
+                              .get(Logradouros_.DISTRITOS)
+                              .get(Distritos_.CIDADES)
+                              .get(Cidades_.ESTADOS)
+                              .get(Estados_.SIGLA)),
+                      "%"
+                          + cepsFilter
+                              .getLogradourosFilter()
+                              .getDistritosFilter()
+                              .getCidadesFilter()
+                              .getEstadosFilter()
+                              .getSigla()
+                              .toLowerCase()
+                          + "%"));
+            }
+          }
+
+          // ID
+          if (cepsFilter.getLogradourosFilter().getDistritosFilter().getCidadesFilter().getId()
+              != null) {
+            predicates.add(
+                builder.equal(
+                    root.get(Ceps_.LOGRADOUROS)
+                        .get(Logradouros_.DISTRITOS)
+                        .get(Distritos_.CIDADES)
+                        .get(Cidades_.ID),
+                    cepsFilter
+                        .getLogradourosFilter()
+                        .getDistritosFilter()
+                        .getCidadesFilter()
+                        .getId()));
+          }
+          // NOME
+          if (StringUtils.hasLength(
+              cepsFilter
+                  .getLogradourosFilter()
+                  .getDistritosFilter()
+                  .getCidadesFilter()
+                  .getNome())) {
+            predicates.add(
+                builder.like(
+                    builder.lower(
+                        root.get(Ceps_.LOGRADOUROS)
+                            .get(Logradouros_.DISTRITOS)
+                            .get(Distritos_.CIDADES)
+                            .get(Cidades_.NOME)),
+                    "%"
+                        + cepsFilter
+                            .getLogradourosFilter()
+                            .getDistritosFilter()
+                            .getCidadesFilter()
+                            .getNome()
+                            .toLowerCase()
+                        + "%"));
+          }
+
+          // SIGLA
+          if (StringUtils.hasLength(
+              cepsFilter
+                  .getLogradourosFilter()
+                  .getDistritosFilter()
+                  .getCidadesFilter()
+                  .getSigla())) {
+            predicates.add(
+                builder.like(
+                    builder.lower(
+                        root.get(Ceps_.LOGRADOUROS)
+                            .get(Logradouros_.DISTRITOS)
+                            .get(Distritos_.CIDADES)
+                            .get(Cidades_.SIGLA)),
+                    "%"
+                        + cepsFilter
+                            .getLogradourosFilter()
+                            .getDistritosFilter()
+                            .getCidadesFilter()
+                            .getSigla()
+                            .toLowerCase()
+                        + "%"));
+          }
+
+        }
+
+
+        // ID
+        if (cepsFilter.getLogradourosFilter().getDistritosFilter().getId() != null) {
+          predicates.add(
+              builder.equal(
+                  root.get(Ceps_.LOGRADOUROS).get(Logradouros_.DISTRITOS).get(Distritos_.ID),
+                  cepsFilter.getLogradourosFilter().getDistritosFilter().getId()));
+        }
+        // NOME
+        if (StringUtils.hasLength(
+            cepsFilter.getLogradourosFilter().getDistritosFilter().getNome())) {
+          predicates.add(
+              builder.like(
+                  builder.lower(
+                      root.get(Ceps_.LOGRADOUROS).get(Logradouros_.DISTRITOS).get(Distritos_.NOME)),
+                  "%"
+                      + cepsFilter
+                          .getLogradourosFilter()
+                          .getDistritosFilter()
+                          .getNome()
+                          .toLowerCase()
+                      + "%"));
+        }
+
+      }
+
+      // ID
+      if (cepsFilter.getLogradourosFilter().getId() != null) {
+        predicates.add(
+            builder.equal(
+                root.get(Ceps_.LOGRADOUROS).get(Logradouros_.ID),
+                cepsFilter.getLogradourosFilter().getId()));
+      }
+      // NOME
+      if (StringUtils.hasLength(cepsFilter.getLogradourosFilter().getNome())) {
+        predicates.add(
+            builder.like(
+                builder.lower(root.get(Ceps_.LOGRADOUROS).get(Logradouros_.NOME)),
+                "%" + cepsFilter.getLogradourosFilter().getNome().toLowerCase() + "%"));
+      }
+
+      // NOME_REDUZIDO
+      if (StringUtils.hasLength(cepsFilter.getLogradourosFilter().getNomeReduzido())) {
+        predicates.add(
+            builder.like(
+                builder.lower(root.get(Ceps_.LOGRADOUROS).get(Logradouros_.NOME_REDUZIDO)),
+                "%" + cepsFilter.getLogradourosFilter().getNomeReduzido().toLowerCase() + "%"));
+      }
+
+      // NOME_SIMPLIFICADO
+      if (StringUtils.hasLength(cepsFilter.getLogradourosFilter().getNomeSimplificado())) {
+        predicates.add(
+            builder.like(
+                builder.lower(root.get(Ceps_.LOGRADOUROS).get(Logradouros_.NOME_SIMPLIFICADO)),
+                "%" + cepsFilter.getLogradourosFilter().getNomeSimplificado().toLowerCase() + "%"));
+      }
+
+
+      // TIPO_LOGRADOURO
+      if (cepsFilter.getLogradourosFilter().getTiposLogradourosFilter() != null) {
+        // DESCRICAO
+        if (StringUtils.hasLength(
+            cepsFilter.getLogradourosFilter().getTiposLogradourosFilter().getDescricao())) {
+          predicates.add(
+              builder.like(
+                  builder.lower(
+                      root.get(Ceps_.LOGRADOUROS)
+                          .get(Logradouros_.TIPOS_LOGRADOUROS)
+                          .get(TiposLogradouros_.DESCRICAO)),
+                  "%"
+                      + cepsFilter
+                          .getLogradourosFilter()
+                          .getTiposLogradourosFilter()
+                          .getDescricao()
+                          .toLowerCase()
+                      + "%"));
+        }
+
+        // ID
+        if (cepsFilter.getLogradourosFilter().getTiposLogradourosFilter().getId() != null) {
+          predicates.add(
+              builder.equal(
+                  root.get(Ceps_.LOGRADOUROS)
+                      .get(Logradouros_.TIPOS_LOGRADOUROS)
+                      .get(TiposLogradouros_.ID),
+                  cepsFilter.getLogradourosFilter().getTiposLogradourosFilter().getId()));
+        }
+        // SIGLA
+        if (StringUtils.hasLength(
+            cepsFilter.getLogradourosFilter().getTiposLogradourosFilter().getSigla())) {
+          predicates.add(
+              builder.like(
+                  builder.lower(
+                      root.get(Ceps_.LOGRADOUROS)
+                          .get(Logradouros_.TIPOS_LOGRADOUROS)
+                          .get(TiposLogradouros_.SIGLA)),
+                  "%"
+                      + cepsFilter
+                          .getLogradourosFilter()
+                          .getTiposLogradourosFilter()
+                          .getSigla()
+                          .toLowerCase()
+                      + "%"));
+        }
+      }
+
+    // NUMERO_FIM
+    if (cepsFilter.getNumeroFim() != null) {
+      predicates.add(builder.equal(root.get(Ceps_.NUMERO_FIM), cepsFilter.getNumeroFim()));
+    }
+    // NUMERO_INI
+    if (cepsFilter.getNumeroIni() != null) {
+      predicates.add(builder.equal(root.get(Ceps_.NUMERO_INI), cepsFilter.getNumeroIni()));
+    }
+
+    return predicates.toArray(new Predicate[predicates.size()]);
+  }
+
+  private void adicionarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
+    int paginaAtual = pageable.getPageNumber();
+    int totalRegistrosPorPagina = pageable.getPageSize();
+    int primeiroRegistroDaPagina = paginaAtual * totalRegistrosPorPagina;
+
+    query.setFirstResult(primeiroRegistroDaPagina);
+    query.setMaxResults(totalRegistrosPorPagina);
+  }
+
+  private Long total(CepsFilter filter) {
+    CriteriaBuilder builder = manager.getCriteriaBuilder();
+    CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+    Root<Ceps> root = criteria.from(Ceps.class);
+
+    Predicate[] predicates = criarRestricoes(filter, builder, root);
+    criteria.where(predicates);
+
+    criteria.select(builder.count(root));
+    return manager.createQuery(criteria).getSingleResult();
+  }
+}

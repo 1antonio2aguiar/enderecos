@@ -1,0 +1,60 @@
+import { MessageService } from 'primeng/api';
+import { Distritos } from './../../../shared/models/distritos';
+import { Component, Injector } from '@angular/core';
+import { BaseResourceFormComponent } from '../../../shared/components/base-resource-form/base-resource-form.component';
+import { DistritosService } from '../distritos.service';
+import { Validators } from '@angular/forms';
+import { CidadesService } from './../../cidades/cidades.service';
+
+@Component({
+  selector: 'app-distritos-cadastro',
+  templateUrl: './distritos-cadastro.component.html',
+  styleUrls: ['./distritos-cadastro.component.css']
+})
+export class DistritosCadastroComponent extends BaseResourceFormComponent<Distritos> {
+
+cidadeList = [];
+
+  constructor(
+    protected distritosService: DistritosService
+  , protected cidadesService: CidadesService
+  , protected injector: Injector) {
+
+    super(injector, new Distritos(), distritosService, Distritos.fromJson, new MessageService());
+	this.loadCidade();
+
+  }
+ 
+  protected buildResourceForm() {
+    this.resourceForm = this.formBuilder.group({
+		cidade: 
+this.formBuilder.group({
+id: [null]
+}),
+		codigoInep: [null, [Validators.required, Validators.minLength(5)]],
+		dataAlteracao: [null, [Validators.required, Validators.minLength(5)]],
+		id: [null, [Validators.required, Validators.minLength(5)]],
+		nome: [null, [Validators.required, Validators.minLength(5)]],
+		usuario: [null, [Validators.required, Validators.minLength(5)]],
+    });
+  }
+ 
+  protected creationPageTitle(): string {
+    return 'Cadastro de Novo Distritos';
+  }
+ 
+  protected editionPageTitle(): string {
+    const distritosName = this.resource.cidade || '';
+    return 'Editando Distritos: ' + distritosName;
+  }
+
+ loadCidade() { 
+     this.cidadesService.listAll() 
+       .then(cidades => { 
+         this.cidadeList = cidades.map(c => 
+                 ({ label: c.nome, value: c.id }) 
+           ); 
+       }) 
+       .catch(erro => erro); 
+   } 
+}

@@ -1,0 +1,13 @@
+package br.com.codiub.enderecos.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.com.codiub.enderecos.entity.Bairros;
+import br.com.codiub.enderecos.entity.DadosBairros;
+import br.com.codiub.enderecos.repository.bairros.BairrosRepositoryQuery;
+
+public interface BairrosRepository 
+	extends JpaRepository<Bairros, Long>, BairrosRepositoryQuery {}

@@ -1,0 +1,14 @@
+package br.com.codiub.enderecos.filter;
+
+import java.math.BigDecimal;
+
+import lombok.Data;
+
+@Data
+public class EstadosFilter {
+  private BigDecimal codigoInep;
+  private BigDecimal id;
+  private String nome;
+  private PaisesFilter paisesFilter;
+  private String sigla;
+}

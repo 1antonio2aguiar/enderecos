@@ -1,0 +1,133 @@
+import { Estados } from './../../../shared/models/estados';
+import { Cidades } from './../../../shared/models/cidades';
+import { Distritos } from './../../../shared/models/distritos';
+import { CidadesModalComponent } from './../../cidades/cidades-modal/cidades-modal.component';
+import { MessageService } from "primeng/api";
+import { Bairros } from "./../../../shared/models/bairros";
+import { Component, Injector } from "@angular/core";
+import { BaseResourceFormComponent } from "../../../shared/components/base-resource-form/base-resource-form.component";
+import { BairrosService } from "../bairros.service";
+import { Validators } from "@angular/forms";
+import { DistritosService } from "./../../distritos/distritos.service";
+import { DialogService } from 'primeng';
+
+@Component({
+  selector: "app-bairros-cadastro",
+  templateUrl: "./bairros-cadastro.component.html",
+  styleUrls: ["./bairros-cadastro.component.css"],
+})
+export class BairrosCadastroComponent extends BaseResourceFormComponent<Bairros> {
+  distritoList = [];
+  zonaRural = [{ label: 'Sim', value: 'S' }, { label: 'Não', value: 'N' }]
+
+  constructor(
+    protected bairrosService: BairrosService,
+    protected distritosService: DistritosService,
+    protected injector: Injector,
+    public dialogService: DialogService
+  ) {
+    super(injector, new Bairros(), bairrosService, Bairros.fromJson, new MessageService());
+    this.loadDistrito();
+  }
+
+  protected buildResourceForm() {
+    this.resourceForm = this.formBuilder.group({
+
+      distritos: this.formBuilder.group({
+        cidades: this.formBuilder.group({
+          estados: this.formBuilder.group({
+            sigla: [null]
+          }),
+
+          id: [null, [Validators.required, Validators.minLength(5)]],
+          nome: [null]
+
+        }),
+        nome: [null]
+      }),
+
+      nome: [null, [Validators.required, Validators.minLength(5)]],
+      nomeAbreviado: [null],
+
+      zonaRural: [null],
+      nomePopular: [null],
+      dataCriacao: [null],
+      leiCriacao: [null],
+      dataDecreto: [null],
+      decreto: [null],
+      dataPortaria: [null],
+      portaria: [null],
+
+      pessoas: this.formBuilder.group({
+        nome: [null],
+        cpf: [null]
+      })
+
+
+    });
+
+    this.resourceForm.patchValue({
+      usuario: JSON.parse(sessionStorage.getItem("usuario")).nome,
+    });
+  }
+
+  protected creationPageTitle(): string {
+    return "Cadastro de Novo Bairros";
+  }
+
+  protected editionPageTitle(): string {
+    const bairrosName = this.resource.dataAlteracao || "";
+    return "Editando Bairros: " + bairrosName;
+  }
+
+  loadDistrito() {
+    this.distritosService
+      .listAll()
+      .then((distritos) => {
+        this.distritoList = distritos.map((c) => ({ label: c.nome, value: c.id }));
+      })
+      .catch((erro) => erro);
+  }
+
+  // Modal Cidade/distrito/estado
+  showCidades($event) {
+    const ref = this.dialogService.open(CidadesModalComponent, {
+      header: 'Selecione a Cidade/Distrito',
+      width: '70%'
+    });
+
+    ref.onClose.subscribe((distrito) => {
+      //console.log(distrito);
+
+      this.resourceForm.patchValue(
+        {
+          distritos: {
+            cidades: {
+              id: distrito.cidades.id,
+              nome: distrito.cidades.nome,
+
+              estados: {
+                sigla: distrito.cidades.estados.sigla
+              }
+
+            },
+            nome: distrito.nome
+          }
+        }
+      );
+    });
+  }
+
+  // Modal pessoas vereador
+  showPessoas($event) {
+
+    const ref = this.dialogService.open(CidadesModalComponent, {
+      header: 'Selecione a Pessoa/Vereador',
+      width: '70%'
+    });
+
+
+
+  }
+
+}

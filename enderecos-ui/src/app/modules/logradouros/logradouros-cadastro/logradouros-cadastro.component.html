@@ -1,0 +1,156 @@
+<!-- CTRL + SHIFT + F for pretty -->
+<app-bread-crumb [items]="[{label: 'Logradouros', routerLink:'/logradouros'}, {label: pageTitle}]"></app-bread-crumb>
+
+<div class="margin">
+
+  <p-panel header="Preencha o Formulario:">
+
+    <!--{{resourceForm.value | json}} -->
+
+    <form [formGroup]="resourceForm" (submit)="submitForm()">
+
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+
+        <div class="p-col-12 p-md-6 p-lg-6" formGroupName="distritos">
+          <label for="cidade">Cidade</label>
+          <div class="ui-inputgroup" formGroupName="cidades">
+            <button [disabled]="botaoOnOf" pButton type="button" label="Buscar" (click)="showCidades($event)"></button>
+            <input type="text" style="font-weight: bold;" pInputText placeholder="Informe a cidade"
+              formControlName="nome" disabled="true">
+          </div>
+        </div>
+
+        <div class="p-col-12 p-md-5 p-lg-5" formGroupName="distritos">
+          <label>Distrito</label>
+          <input id="distritoNome" type="text" style="font-weight: bold;" size="80" pInputText formControlName="nome"
+            disabled="true">
+        </div>
+
+        <div class="p-col-12 p-md-1 p-lg-1" formGroupName="distritos">
+          <label for="sigla">Estado</label>
+          <span formGroupName="cidades">
+            <span formGroupName="estados">
+              <input id="sigla" type="text" style="font-weight: bold;" size="2" pInputText formControlName="sigla"
+                disabled="true">
+            </span>
+          </span>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2" formGroupName="tiposLogradouros">
+          <label for="tipoLogradouro">Tipo Logradouro</label>
+          <p-dropdown id="tipoLogradouro" name="tipoLogradouro" [options]="tipoLogradouroList" placeholder="Selecione"
+            [filter]="true" formControlName="id"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <label for="tituloPatente">Título Patente</label>
+          <p-dropdown id="tituloPatente" name="tituloPatente" [options]="tituloPatenteList" placeholder="Selecione"
+            [filter]="true" formControlName="tituloPatente"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <label for="preposicao">Preposição</label>
+          <p-dropdown id="preposicao" name="preposicao" [options]="preposicaoList" placeholder="Selecione"
+            [filter]="true" formControlName="preposicao"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <label for="nome">Nome</label>
+          <input id="nome" type="text" size="80" pInputText formControlName="nome">
+          <app-form-field-error [form-control]="resourceForm.get('nome')" header-colum="Nome"></app-form-field-error>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <label for="nomeReduzido">Nome Reduzido</label>
+          <input id="nomeReduzido" type="text" size="80" pInputText formControlName="nomeReduzido">
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <label for="nomeSimplificado">Nome Simples</label>
+          <input id="nomeSimplificado" type="text" size="80" pInputText formControlName="nomeSimplificado">
+        </div>
+
+        <div class="ui-g-2 ui-md-2 ui-fluid" formGroupName="dadosLogradouros">
+          <label>Data Criação</label>
+          <p-calendar name="dataCriacao" dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false"
+            [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030" [showIcon]="false"
+            formControlName="dataCriacao" [locale]="ptBrLocale"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2" formGroupName="dadosLogradouros">
+          <label for="leiCriacao">Lei Criação</label>
+          <input id="leiCriacao" type="text" size="20" pInputText formControlName="leiCriacao">
+        </div>
+
+        <div class="ui-g-2 ui-md-2 ui-fluid" formGroupName="dadosLogradouros">
+          <label>Data Decreto</label>
+          <p-calendar name="dataDecreto" dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false"
+            [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030" [showIcon]="false"
+            formControlName="dataDecreto" [locale]="ptBrLocale"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2" formGroupName="dadosLogradouros">
+          <label for="decreto">Decreto</label>
+          <input id="decreto" type="text" size="20" pInputText formControlName="decreto">
+        </div>
+
+        <div class="ui-g-2 ui-md-2 ui-fluid" formGroupName="dadosLogradouros">
+          <label>Data Portaria</label>
+          <p-calendar name="dataPortaria" dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false"
+            [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030" [showIcon]="false"
+            formControlName="dataPortaria" [locale]="ptBrLocale"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2" formGroupName="dadosLogradouros">
+          <label for="portaria">Portaria</label>
+          <input id="portaria" type="text" size="20" pInputText formControlName="portaria">
+        </div>
+
+        <div class="p-col-12 p-md-4 p-lg-4" formGroupName="dadosLogradouros">
+          <label for="vereador">Vereador</label>
+          <div class="ui-inputgroup" formGroupName="vwPessoas">
+            <!--{{resourceForm.get('dadosLogradouros').get('pessoaVereador').value}} -->
+            <button [disabled]="(resourceForm.get('dadosLogradouros').get('pessoaVereador').value != null &&
+            resourceForm.get('dadosLogradouros').get('pessoaVereador').value != 0)"
+            pButton type="button" label="Buscar" (click)="showPessoas($event)"></button>
+            <input type="text" style="font-weight: bold;" pInputText placeholder="Informe o vereador"
+              formControlName="nomeVereador" disabled="true">
+          </div>
+        </div>
+
+
+        <div class="p-col-12 p-md-2 p-lg-2" formGroupName="dadosLogradouros">
+          <label for="cpf">C.P.F</label>
+          <span formGroupName="vwPessoas">
+            <input [imask]="masks" id="cpf" type="text" style="font-weight: bold;" size="80" pInputText formControlName="cpf"
+              disabled="true">
+          </span>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+          <label for="complemento">Complemento</label>
+          <input id="complemento" type="text" size="100" pInputText formControlName="complemento">
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-12" formGroupName="dadosLogradouros">
+          <label for="observacao">Observação</label>
+          <input id="observacao" type="text" size="200" pInputText formControlName="observacao">
+        </div>
+      </div>
+
+      <div class="p-grid ui-fluid" style="margin-top: 5px;">
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <button pButton type="button" label="Voltar" routerLink="/logradouros" class="ui-button-danger"></button>
+        </div>
+
+        <div class="p-col-12 p-md-2 p-lg-2">
+          <button pButton type="button" [disabled]="submittingForm || resourceForm.invalid" type="submit"
+            icon="pi pi-check" label="Salvar" class="ui-button-success"></button>
+        </div>
+
+      </div>
+
+    </form>
+  </p-panel>
+</div>

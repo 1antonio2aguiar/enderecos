@@ -1,0 +1,8 @@
+
+<app-navbar *ngIf="exibindoNavbar()"></app-navbar>
+
+<main class="container-fluid">
+  <p-toast></p-toast>
+  <router-outlet></router-outlet>
+</main>
+

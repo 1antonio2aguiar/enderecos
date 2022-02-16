@@ -1,0 +1,18 @@
+package br.com.codiub.enderecos.filter;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
+public class CepsFilter {
+  private BairrosFilter bairrosFilter;
+  private String cep;
+  private BigDecimal codigoCorreios;
+  private BigDecimal id;
+  private String identificacao;
+  private LogradourosFilter logradourosFilter;
+  private BigDecimal numeroFim;
+  private BigDecimal numeroIni;
+}

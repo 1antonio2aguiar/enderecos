@@ -1,0 +1,21 @@
+package br.com.codiub.enderecos.input;
+
+import br.com.codiub.enderecos.entity.Distritos;
+import br.com.codiub.enderecos.entity.TiposLogradouros;
+import lombok.Data;
+
+@Data
+public class LogradourosInput {
+	private Long id;
+	private Distritos distritos;
+	private TiposLogradouros tiposLogradouros;
+	private String nome;
+	private String preposicao;
+	private String tituloPatente;
+	private String nomeReduzido;
+	private String nomeSimplificado;
+	private String complemento;
+	private String usuario;
+	private DadosLogradourosInput dadosLogradouros;
+	
+}

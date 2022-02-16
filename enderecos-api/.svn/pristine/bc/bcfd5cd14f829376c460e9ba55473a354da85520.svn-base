@@ -1,0 +1,115 @@
+<!-- CTRL + SHIFT + F for pretty -->
+<app-bread-crumb [items]="[{label: 'VwPessoas'}]"></app-bread-crumb>
+ 
+<div class="margin">
+
+<p-toast></p-toast>
+
+  <div class="p-col-12 p-md-12 p-lg-12">
+    <app-page-header page-title="VwPessoas" button-text="+" button-link="new" button-class="btn-success"></app-page-header>
+  </div>
+ 
+  <div class="p-grid ui-fluid">
+ 
+    <div class="p-col-12 p-md-12 p-lg-12">
+ 
+      <p-table #tabela [loading]="loading" [responsive]="true" [value]="resources" [paginator]="true"
+        [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="filtro.totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)" [autoLayout]="true">
+ 
+        <ng-template pTemplate="header">
+ 
+          <tr>
+ 
+            <th class="blue-bg">cnpj</th>
+            <th class="blue-bg">cpf</th>
+            <th class="blue-bg">fisica_juridica</th>
+            <th class="blue-bg">id</th>
+            <th class="blue-bg">nome</th>
+            <th class="blue-bg">situacao</th>
+            <th rowspan="2" style="text-align: center;" class="blue-bg">Ações</th>
+ 
+          </tr>
+ 
+          <tr>
+ 
+            <th class="ui-fluid">
+                <input pInputText type="text" name="cnpj" (input)="tabela.filter($event.target.value, 'cnpj', 'equals')" >
+            </th>
+            <th class="ui-fluid">
+                <input pInputText type="text" name="cpf" (input)="tabela.filter($event.target.value, 'cpf', 'equals')" >
+            </th>
+            <th class="ui-fluid">
+                <input pInputText type="text" name="fisica_juridica" (input)="tabela.filter($event.target.value, 'fisica_juridica', 'equals')" >
+            </th>
+            <th class="ui-fluid">
+                <input pInputText type="text" name="id" (input)="tabela.filter($event.target.value, 'id', 'equals')" >
+            </th>
+            <th class="ui-fluid">
+                <input pInputText type="text" name="nome" (input)="tabela.filter($event.target.value, 'nome', 'equals')" >
+            </th>
+            <th class="ui-fluid">
+                <input pInputText type="text" name="situacao" (input)="tabela.filter($event.target.value, 'situacao', 'equals')" >
+            </th>
+ 
+          </tr>
+ 
+        </ng-template>
+ 
+        <ng-template pTemplate="body" let-vwPessoas>
+ 
+          <tr>
+ 
+            <td>
+                {{vwPessoas.cnpj}}
+            </td>
+            <td>
+                {{vwPessoas.cpf}}
+            </td>
+            <td>
+                {{vwPessoas.fisica_juridica}}
+            </td>
+            <td>
+                {{vwPessoas.id}}
+            </td>
+            <td>
+                {{vwPessoas.nome}}
+            </td>
+            <td>
+                {{vwPessoas.situacao}}
+            </td>
+ 
+            <td style="text-align: center;" class="p-col-2">
+ 
+              <button pButton type="button" [routerLink]="[vwPessoas.id, 'edit']" icon="pi pi-pencil"
+                style="margin-right:9px;"></button>
+ 
+              <button pButton type="button" (click)="deleteResource(vwPessoas)" icon="pi pi-trash"
+                class="ui-button-danger"></button>
+ 
+            </td>
+ 
+          </tr>
+ 
+        </ng-template>
+ 
+        <ng-template pTemplate="emptymessage">
+ 
+          <tr>
+ 
+            <td colspan="6">
+              Nenhum registro cadastrado!
+            </td>
+ 
+          </tr>
+ 
+        </ng-template>
+ 
+      </p-table>
+ 
+    </div>
+ 
+  </div>
+ 
+</div>
+<app-base-resource-confirmation header="Atenção" menssage="Deseja realmente deletar este item ?"></app-base-resource-confirmation>
